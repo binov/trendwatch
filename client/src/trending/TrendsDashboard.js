@@ -133,13 +133,7 @@ class TrendsDashboard extends Component {
               {this.props.sportsTrends.length > 0 &&
                 this.props.sportsTrends.map(trendItem => (
                   <Grid item key={trendItem._id} xs={12} sm={6} md={4}>
-                    <Card
-                      className={
-                        trendItem.isSubscribed
-                          ? cardClasses
-                          : unsubscribedCardClasses
-                      }
-                    >
+                    <Card className={cardClasses}>
                       <CardMedia
                         className={classes.cardMedia}
                         image={trendItem.imageUrl}
