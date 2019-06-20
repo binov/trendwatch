@@ -6,6 +6,7 @@ const trendSchema = new Schema({
   eventName: String,
   eventCategory: String,
   channel: String,
+  twitterCount: String,
   isSubscribed: Boolean,
   rating: { type: Number, default: 0, min: 0, max: 5 }
 });

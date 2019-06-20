@@ -21,6 +21,7 @@ import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
 import { red, blue, grey } from "@material-ui/core/colors";
 import "./Trending.css";
+import TwitterIcon from "./twittericon";
 
 function MadeWithLove() {
   return (
@@ -139,6 +140,18 @@ class TrendsDashboard extends Component {
                         image={trendItem.imageUrl}
                         title={trendItem.eventName}
                       />
+                      <Grid
+                        container
+                        alignItems="flex-start"
+                        justify="flex-end"
+                        direction="row"
+                        style={{ paddingTop: 5, paddingRight: 5 }}
+                      >
+                        <TwitterIcon />
+                        <span style={{ color: "#00acee" }}>
+                          {trendItem.twitterCount}
+                        </span>
+                      </Grid>
                       <CardContent className={classes.cardContent}>
                         <Typography gutterBottom variant="h5" component="h2">
                           {trendItem.eventName}

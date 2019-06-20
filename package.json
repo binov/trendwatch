@@ -21,6 +21,7 @@
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
     "mongoose": "^5.6.0",
-    "nodemon": "^1.19.1"
+    "nodemon": "^1.19.1",
+    "recompose": "^0.30.0"
   }
 }
