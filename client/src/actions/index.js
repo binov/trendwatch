@@ -1,7 +1,7 @@
 import axios from "axios";
 import {
   FETCH_SPORTS_TRENDS,
-  FETCH_EVENT_TRENDS,
+  FETCH_NEWS_TRENDS,
   FETCH_MOVIE_TRENDS
 } from "./action_types";
 
@@ -21,8 +21,8 @@ export const fetchSportsTrends = () => async dispatch => {
   dispatch({ type: FETCH_SPORTS_TRENDS, payload: response, error });
 };
 
-export const fetchEventTrends = () => async dispatch => {
-  const url = "/api/trends/events";
+export const fetchNewsTrends = () => async dispatch => {
+  const url = "/api/trends/news";
   let response;
   let error = null;
   try {
@@ -34,7 +34,7 @@ export const fetchEventTrends = () => async dispatch => {
   if (response && response.status === 204) {
     error = { response: { data: "", status: 204, statusText: "No Content" } };
   }
-  dispatch({ type: FETCH_EVENT_TRENDS, payload: response, error });
+  dispatch({ type: FETCH_NEWS_TRENDS, payload: response, error });
 };
 
 export const fetchMovieTrends = () => async dispatch => {

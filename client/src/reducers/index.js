@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 import {
   fetchSportsTrends,
-  fetchEventTrends,
+  fetchNewsTrends,
   fetchMovieTrends
 } from "./reducer_trends";
 //import ErrorReducer from "./reducer_error";
@@ -9,7 +9,7 @@ import {
 const rootReducer = combineReducers({
   sportsTrends: fetchSportsTrends,
   movieTrends: fetchMovieTrends,
-  eventTrends: fetchEventTrends
+  newsTrends: fetchNewsTrends
   //error: ErrorReducer
 });
 

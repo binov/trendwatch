@@ -1,3 +1,9 @@
 .trendcard:hover {
     box-shadow: -1px 10px 29px 0px rgba(0, 0, 0, 0.8);
 }
+
+.unsubscribedtrendcard {
+    border-style: groove;
+    border-color: rgb(246, 122, 5);
+    border-width: thick
+}

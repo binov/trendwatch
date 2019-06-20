@@ -1,6 +1,6 @@
 import {
   FETCH_SPORTS_TRENDS,
-  FETCH_EVENT_TRENDS,
+  FETCH_NEWS_TRENDS,
   FETCH_MOVIE_TRENDS
 } from "../actions/action_types";
 
@@ -16,9 +16,9 @@ export const fetchSportsTrends = (state = [], action) => {
   return state;
 };
 
-export const fetchEventTrends = (state = [], action) => {
+export const fetchNewsTrends = (state = [], action) => {
   switch (action.type) {
-    case FETCH_EVENT_TRENDS:
+    case FETCH_NEWS_TRENDS:
       return action.payload && action.payload.data
         ? [...action.payload.data]
         : [];

@@ -12,9 +12,14 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import { withStyles } from "@material-ui/core/styles";
+import {
+  MuiThemeProvider,
+  withStyles,
+  createMuiTheme
+} from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
+import { red, blue, grey } from "@material-ui/core/colors";
 import "./Trending.css";
 
 function MadeWithLove() {
@@ -65,7 +70,7 @@ class TrendsDashboard extends Component {
   componentDidMount() {
     this.props.fetchSportsTrends();
     this.props.fetchMovieTrends();
-    this.props.fetchEventTrends();
+    this.props.fetchNewsTrends();
   }
 
   render() {
@@ -73,15 +78,20 @@ class TrendsDashboard extends Component {
     const { classes } = this.props;
     //const classes = useStyles();
     const cardClasses = `trendcard ${classes.card}`;
+    const unsubscribedCardClasses = `unsubscribedtrendcard trendcard ${
+      classes.card
+    }`;
+    const bgColor = grey[800];
     console.log(
       "Sports Trends:" + JSON.stringify(this.props.sportsTrends, null, 4)
     );
     console.log(
-      "Event Trends:" + JSON.stringify(this.props.eventTrends, null, 4)
+      "News Trends:" + JSON.stringify(this.props.newsTrends, null, 4)
     );
     console.log(
       "Movie Trends:" + JSON.stringify(this.props.movieTrends, null, 4)
     );
+    const redTheme = createMuiTheme({ palette: { primary: red } });
     return (
       <React.Fragment>
         <CssBaseline />
@@ -123,7 +133,13 @@ class TrendsDashboard extends Component {
               {this.props.sportsTrends.length > 0 &&
                 this.props.sportsTrends.map(trendItem => (
                   <Grid item key={trendItem._id} xs={12} sm={6} md={4}>
-                    <Card className={cardClasses}>
+                    <Card
+                      className={
+                        trendItem.isSubscribed
+                          ? cardClasses
+                          : unsubscribedCardClasses
+                      }
+                    >
                       <CardMedia
                         className={classes.cardMedia}
                         image={trendItem.imageUrl}
@@ -133,8 +149,29 @@ class TrendsDashboard extends Component {
                         <Typography gutterBottom variant="h5" component="h2">
                           {trendItem.eventName}
                         </Typography>
-                        <Typography>Now on: {trendItem.channel}</Typography>
+                        <Typography>
+                          Now on:{" "}
+                          <span style={{ fontWeight: "bold" }}>
+                            {trendItem.channel}
+                          </span>
+                        </Typography>
                       </CardContent>
+                      {!trendItem.isSubscribed && (
+                        <CardActions>
+                          <Button
+                            color="primary"
+                            variant="raised"
+                            style={{
+                              borderRadius: 35,
+                              backgroundColor: "#f67a05",
+                              padding: "5px 5px",
+                              fontSize: "15px"
+                            }}
+                          >
+                            SUBSCRIBE
+                          </Button>
+                        </CardActions>
+                      )}
                     </Card>
                   </Grid>
                 ))}
@@ -142,10 +179,10 @@ class TrendsDashboard extends Component {
           </Container>
           <Container className={classes.cardGrid} maxWidth="md">
             {/* End hero unit */}
-            <h1>Events</h1>
+            <h1>News</h1>
             <Grid container spacing={4}>
-              {this.props.eventTrends.length > 0 &&
-                this.props.eventTrends.map(trendItem => (
+              {this.props.newsTrends.length > 0 &&
+                this.props.newsTrends.map(trendItem => (
                   <Grid item key={trendItem._id} xs={12} sm={6} md={4}>
                     <Card className={cardClasses}>
                       <CardMedia
@@ -157,8 +194,29 @@ class TrendsDashboard extends Component {
                         <Typography gutterBottom variant="h5" component="h2">
                           {trendItem.eventName}
                         </Typography>
-                        <Typography>Now on: {trendItem.channel}</Typography>
+                        <Typography>
+                          Now on:{" "}
+                          <span style={{ fontWeight: "bold" }}>
+                            {trendItem.channel}
+                          </span>
+                        </Typography>
                       </CardContent>
+                      {!trendItem.isSubscribed && (
+                        <CardActions>
+                          <Button
+                            color="primary"
+                            variant="raised"
+                            style={{
+                              borderRadius: 35,
+                              backgroundColor: "#f67a05",
+                              padding: "5px 5px",
+                              fontSize: "15px"
+                            }}
+                          >
+                            SUBSCRIBE
+                          </Button>
+                        </CardActions>
+                      )}
                     </Card>
                   </Grid>
                 ))}
@@ -181,8 +239,29 @@ class TrendsDashboard extends Component {
                         <Typography gutterBottom variant="h5" component="h2">
                           {trendItem.eventName}
                         </Typography>
-                        <Typography>Now on: {trendItem.channel}</Typography>
+                        <Typography>
+                          Now on:{" "}
+                          <span style={{ fontWeight: "bold" }}>
+                            {trendItem.channel}
+                          </span>
+                        </Typography>
                       </CardContent>
+                      {!trendItem.isSubscribed && (
+                        <CardActions>
+                          <Button
+                            color="primary"
+                            variant="raised"
+                            style={{
+                              borderRadius: 35,
+                              backgroundColor: "#f67a05",
+                              padding: "5px 5px",
+                              fontSize: "15px"
+                            }}
+                          >
+                            SUBSCRIBE
+                          </Button>
+                        </CardActions>
+                      )}
                     </Card>
                   </Grid>
                 ))}
@@ -208,8 +287,8 @@ class TrendsDashboard extends Component {
     );
   }
 }
-function mapStateToProps({ sportsTrends, eventTrends, movieTrends }) {
-  return { sportsTrends, eventTrends, movieTrends };
+function mapStateToProps({ sportsTrends, newsTrends, movieTrends }) {
+  return { sportsTrends, newsTrends, movieTrends };
 }
 
 export default connect(

@@ -41,7 +41,7 @@ module.exports = app => {
     }
   });
 
-  app.get("/api/trends/events", async (req, res) => {
+  app.get("/api/trends/news", async (req, res) => {
     let trendsData;
     var pageNo = parseInt(req.query.pageNo);
     var size = parseInt(req.query.size);
@@ -57,7 +57,7 @@ module.exports = app => {
     }
     try {
       trendsData = await TrendsModel.find()
-        .find({ eventCategory: "events" })
+        .find({ eventCategory: "news" })
         .sort("-_id")
         .skip(size * (pageNo - 1))
         .limit(size)
